@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\pages\user\user.component.spec.ts">
+    <testCase name="UserComponent Iniciar component" duration="5"/>
+    <testCase name="UserComponent Cadastrar Usuario" duration="1"/>
+    <testCase name="UserComponent Cadastrar Usuario NOME INVALIDO" duration="1"/>
+    <testCase name="UserComponent Cadastrar Usuario EMAIL INVALIDO" duration="1"/>
+    <testCase name="UserComponent Pegar Mensagem de erro EMAIL VAZIO" duration="1"/>
+    <testCase name="UserComponent Pegar Mensagem de erro EMAIL INVALIDO" duration="0"/>
+    <testCase name="UserComponent Pegar Mensagem de erro NOME" duration="1"/>
+    <testCase name="UserComponent Deve desconstruir component" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\core\services\user.service.spec.ts">
+    <testCase name="UserService Iniciar service" duration="3"/>
+    <testCase name="UserService GET" duration="1"/>
+    <testCase name="UserService GET com novos cadastros" duration="1"/>
+    <testCase name="UserService SAVE" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\shared\layout\menu\menu.component.spec.ts">
+    <testCase name="MenuComponent Iniciar component" duration="3"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\pages\dashboard\dashboard.component.spec.ts">
+    <testCase name="DashboardComponent Iniciar component" duration="7"/>
+    <testCase name="DashboardComponent Ativar spinner" duration="1"/>
+    <testCase name="DashboardComponent Desativar spinner" duration="1"/>
+    <testCase name="DashboardComponent Depois de iniciar o component" duration="2"/>
+    <testCase name="DashboardComponent Pegar os usuários" duration="1"/>
+    <testCase name="DashboardComponent Executar filtro pelo nome" duration="1"/>
+    <testCase name="DashboardComponent Testar Paginação" duration="1"/>
+    <testCase name="DashboardComponent Executar filtro pelo email" duration="1"/>
+    <testCase name="DashboardComponent Editar Usuário" duration="1"/>
+  </file>
+</testExecutions>

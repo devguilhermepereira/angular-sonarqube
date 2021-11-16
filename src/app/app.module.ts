@@ -4,17 +4,16 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule } from '@angular/router';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AngularMaterialModule } from './core/angular-material.module';
 import { CommonModule } from '@angular/common';
-import { DashboardModule } from './dashboard/dashboard.module';
+import {PagesModule} from "./pages/pages.module";
+import {LayoutModule} from "./shared/layout/layout.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    
   ],
   imports: [
     CommonModule,
@@ -24,7 +23,8 @@ import { DashboardModule } from './dashboard/dashboard.module';
     NgxSpinnerModule,
     BrowserAnimationsModule,
     AngularMaterialModule,
-    DashboardModule
+    PagesModule,
+    LayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent],

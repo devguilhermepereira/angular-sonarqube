@@ -1,0 +1,39 @@
+<div class="div-container-users">
+  <div class="div-title"><h1>Usuários</h1></div>
+  <mat-card class="card-table">
+    <div class="div-container-table">
+      <mat-form-field appearance="standard">
+        <mat-label>Filtro</mat-label>
+        <input matInput (keyup)="filtro($event)" placeholder="Filtre por ID, Nome ou email" #input>
+      </mat-form-field>
+
+      <table mat-table [dataSource]="dataSource" matSort>
+        <caption></caption>
+
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header id="name"> NOME</th>
+          <td mat-cell *matCellDef="let row"> {{row.name}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="email">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header id="email"> E-MAIL</th>
+          <td mat-cell *matCellDef="let row"> {{row.email}} </td>
+        </ng-container>
+
+        <ng-container matColumnDef="active">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header id="active"> STATUS</th>
+          <td mat-cell *matCellDef="let row"> {{(row.active ? 'Ativo' : 'Inativo')}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row (click)="editar(row)" *matRowDef="let row; columns: displayedColumns;"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="4">Nenhum dado corresponde ao filtro "{{input.value}}"</td>
+        </tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+    </div>
+  </mat-card>
+</div>
+

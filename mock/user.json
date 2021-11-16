@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Guilherme Pereira",
+      "email": "guilhermepereira@email.com",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Amanda Varaschin",
+      "email": "amandavaraschin@email.com",
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Jefferson Silva",
+      "email": "silvajefferson@email.com",
+      "active": false
+    },
+    {
+      "id": 4,
+      "name": "Ana Maria",
+      "email": "anamaria@email.com",
+      "active": true
+    },
+    {
+      "id": 5,
+      "name": "Robson Luiz Santos",
+      "email": "robsluizsantos@email.com",
+      "active": true
+    }
+  ]
+}

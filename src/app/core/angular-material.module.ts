@@ -35,7 +35,7 @@ import {MatIconModule} from "@angular/material/icon";
 import {MatGridListModule} from "@angular/material/grid-list";
 import {MatExpansionModule} from "@angular/material/expansion";
 import {MatTableModule} from "@angular/material/table";
-import {MAT_FORM_FIELD_DEFAULT_OPTIONS} from "@angular/material/form-field";
+import {MAT_FORM_FIELD_DEFAULT_OPTIONS, MatFormFieldModule} from "@angular/material/form-field";
 import {MatChipsModule} from "@angular/material/chips";
 import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
@@ -50,6 +50,7 @@ import {MatDividerModule} from "@angular/material/divider";
     ReactiveFormsModule
   ],
   exports: [
+    ReactiveFormsModule,
     A11yModule,
     CdkStepperModule,
     CdkTableModule,
@@ -59,6 +60,7 @@ import {MatDividerModule} from "@angular/material/divider";
     MatBadgeModule,
     MatBottomSheetModule,
     MatButtonModule,
+    MatFormFieldModule,
     MatButtonToggleModule,
     MatCardModule,
     MatCheckboxModule,

@@ -5,7 +5,8 @@ import { RouterModule } from '@angular/router';
 import { NgxSpinnerModule } from "ngx-spinner";
 import { CommonModule } from '@angular/common';
 import { DashboardComponent } from './dashboard.component';
-import { AngularMaterialModule } from '../core/angular-material.module';
+import { AngularMaterialModule } from '../../core/angular-material.module';
+import {UserService} from "../../core/services/user.service";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,8 @@ import { AngularMaterialModule } from '../core/angular-material.module';
     NgxSpinnerModule,
     AngularMaterialModule
   ],
-  providers: [],
+  providers: [
+    UserService
+  ],
 })
 export class DashboardModule { }
