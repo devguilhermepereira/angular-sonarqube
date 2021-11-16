@@ -44,9 +44,6 @@ testem.log
 .DS_Store
 Thumbs.db
 
-/.scannerwork
-/coverage
 
-.scannerwork
 coverage
 node_modules
