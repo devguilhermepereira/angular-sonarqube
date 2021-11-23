@@ -45,13 +45,6 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   getUsers() {
     this.spinner.show();
     this.reset();
-    this.userService.get().subscribe((res) => {
-      this.users = JSON.parse(JSON.stringify(res));
-      this.dataSource = new MatTableDataSource(res);
-      this.dataSource.paginator = this.paginator;
-      this.dataSource.sort = this.sort;
-      setTimeout(() => this.setUsersRoles(), 1000);
-    })
   }
 
   setUsersRoles() {
@@ -83,7 +76,10 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   }
 
   getRoleName(user: UserModel): string {
-    return user && user.userType ? this.userRoles.find((row: any) => row.id === user.userType.role).name : '';
+    if (user && user.userType) {
+      const index = this.userRoles.findIndex((row: any) => row.id === user.userType.role);
+      return index >= 0 ? this.userRoles[index].name : '';
+    } else return '';
   }
 
   goEdit(user: UserModel) {

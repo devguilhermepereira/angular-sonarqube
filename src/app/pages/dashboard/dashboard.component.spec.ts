@@ -1,13 +1,15 @@
 import {DashboardComponent} from './dashboard.component';
-import {MatTableDataSource} from "@angular/material/table";
-import Mock from '../../../../mock/user.json';
 import {UserModel} from "../../core/models/user.model";
+import {Observable} from "rxjs";
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
   let spinnerServiceMock: any;
   let userServiceMock: any;
   let routerMock: any;
+  let rolesServiceMock: any;
 
   beforeEach(async () => {
     // instancia variavel mock para spinner
@@ -17,19 +19,29 @@ describe('DashboardComponent', () => {
     };
     // instancia variavel mock do serviço User
     userServiceMock = {
-      get: jest.fn().mockReturnValue(new Promise<any>((resolve, reject) => true))
+      get: jest.fn().mockReturnValue(new Observable<Array<any>>())
     };
     // instancia variavel mock para router Modulo de rotas do Angular
     routerMock = {
       navigate: jest.fn(),
     }
-    component = new DashboardComponent(spinnerServiceMock, userServiceMock, routerMock);
+    // instancia variavel mock do serviço Roles
+    rolesServiceMock = {
+      get: jest.fn().mockReturnValue(new Observable<Array<any>>()),
+    };
+    component = new DashboardComponent(spinnerServiceMock, userServiceMock, routerMock, rolesServiceMock);
   });
 
   it('Iniciar component', () => {
     const ngOnInitSpy = jest.spyOn(component, 'ngOnInit');
     component.ngOnInit();
     expect(ngOnInitSpy).toBeTruthy();
+  });
+
+  it('Depois de iniciar o component', () => {
+    const ngAfterViewInitSpy = jest.spyOn(component, 'ngAfterViewInit');
+    component.ngAfterViewInit();
+    expect(ngAfterViewInitSpy).toBeTruthy();
   });
 
   it('Ativar spinner', () => {
@@ -42,22 +54,17 @@ describe('DashboardComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('Depois de iniciar o component', () => {
-    const ngAfterViewInitSpy = jest.spyOn(component, 'ngAfterViewInit');
-    component.ngAfterViewInit();
-    expect(ngAfterViewInitSpy).toBeTruthy();
-  });
-
   it('Pegar os usuários', () => {
-    const pegarUsuariosSpy = jest.spyOn(component, 'pegarUsuarios');
-    component.pegarUsuarios();
-    setTimeout(() => {
-      component.dataSource = new MatTableDataSource(Mock.users);
+    const getUsersSpy = jest.spyOn(component, 'getUsers');
+    component.getUsers();
+    userServiceMock.get().subscribe((res:any) => {
+      component.users = JSON.parse(JSON.stringify(res));
+      component.dataSource = new MatTableDataSource(res);
       component.dataSource.paginator = component.paginator;
       component.dataSource.sort = component.sort;
-      spinnerServiceMock.hide();
-    }, 3000);
-    expect(pegarUsuariosSpy).toBeTruthy();
+      setTimeout(() => component.setUsersRoles(), 1000);
+    });
+    expect(getUsersSpy).toBeTruthy();
   });
 
   it('Executar filtro pelo nome', () => {
@@ -88,17 +95,85 @@ describe('DashboardComponent', () => {
   });
 
   it('Editar Usuário', () => {
-    const editarSpy = jest.spyOn(component, 'editar');
+    const goEditSpy = jest.spyOn(component, 'goEdit');
     const user: UserModel = {
-      id: 2,
+      id: '2',
       name: "Amanda Varaschin",
       email: "amandavaraschin@email.com",
       active: true
     }
-    component.editar(user);
-    const userEdit = {name: user.name, email: user.email};
-    localStorage.setItem('userEdit', JSON.stringify(userEdit));
-    routerMock.navigate(['/user/' + (user.id ? user.id : 66)])
-    expect(editarSpy).toBeTruthy();
+    component.goEdit(user);
+    expect(goEditSpy).toBeTruthy();
+  });
+
+  it('Executar setUsersRoles', () => {
+    const setUsersRolesSpy = jest.spyOn(component, 'setUsersRoles');
+    const user: UserModel = {
+      id: '212321ASDSADAS',
+      name: "teste",
+      email: "teste@email.com",
+      active: true,
+      userType: {role: '123ASD'}
+    };
+    component.roles = [
+      {name: 'Gerente RH', role: '123ASD'},
+      {name: 'UX', role: 'ASDASD123'}
+    ]
+    component.dataSource = new MatTableDataSource([user]);
+    component.setUsersRoles();
+    expect(setUsersRolesSpy).toBeTruthy();
+  });
+
+  it('Executar setUsersRoles com role', () => {
+    const setUsersRolesSpy = jest.spyOn(component, 'setUsersRoles');
+    const user: UserModel = {
+      id: '212321ASDSADAS',
+      name: "teste",
+      email: "teste@email.com",
+      active: true,
+      userType: {role: '123ASD'}
+    };
+    component.roles = [
+      {name: 'Gerente RH', role: '123ASD'},
+      {name: 'UX', role: 'ASDASD123'}
+    ]
+    component.userRoles = [{name: 'Gerente RH', role: '123ASD'}];
+    component.dataSource = new MatTableDataSource([user]);
+    component.setUsersRoles();
+    expect(setUsersRolesSpy).toBeTruthy();
+  });
+
+  it('Executar getRoleName', () => {
+    const user: any = {userType: {role: '123ASD'}};
+    component.userRoles = [{name: 'Gerente RH', role: '123ASD'}];
+    const roleName = component.getRoleName(user);
+    expect(component.getRoleName(user)).toEqual(roleName);
+  });
+
+  it('Executar getRoleName sem user', () => {
+    const user: any = {};
+    component.userRoles = [{name: 'Gerente RH', role: '123ASD'}];
+    const roleName = component.getRoleName(user);
+    expect(component.getRoleName(user)).toEqual(roleName);
+  });
+
+  it('Executar getRoles', () => {
+    const getRolesSpy = jest.spyOn(component, 'getRoles');
+    const user: UserModel = {
+      id: '212321ASDSADAS',
+      name: "teste",
+      email: "teste@email.com",
+      active: true,
+      userType: {role: '123ASD'}
+    }
+    component.getRoles();
+    component.dataSource.data.push(user);
+    rolesServiceMock.get().subscribe((data: any) => {
+      component.userRoles = data;
+      let roles: any = [];
+      data.forEach((row: any) => roles.push({...row, value: 0}));
+      component.roles = roles;
+    });
+    expect(getRolesSpy).toBeTruthy();
   });
 });

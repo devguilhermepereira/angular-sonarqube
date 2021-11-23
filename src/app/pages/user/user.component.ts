@@ -20,11 +20,11 @@ export class UserComponent implements OnDestroy {
   constructor(private userService: UserService, private rolesService: RolesService) {
     this.getRoles();
     this.user = JSON.parse(<string>localStorage.getItem('userEdit'));
-    if (this.user) {
-      this.name.setValue(this.user.name);
-      this.email.setValue(this.user.email);
-      this.role.setValue(this.user.userType.role);
-    }
+
+  }
+
+  ngOnDestroy(): void {
+    localStorage.removeItem('userEdit');
   }
 
   pegarMensagemErro() {
@@ -41,44 +41,16 @@ export class UserComponent implements OnDestroy {
   cadastrar() {
     if (this.name.invalid || this.email.invalid || this.role.invalid) {
       return;
-    } else {
-      const data: any = {
-        active: true,
-        email: this.email.value,
-        isAdmin: false,
-        name: this.name.value,
-        password: this.name.value + 123,
-      }
-      if (this.user) {
-        this.userService.update(data, this.role.value, this.user).then((res) => {
-          Swal.fire({
-            icon: 'success',
-            title: 'Sucesso!',
-            text: 'Informações atualizadas',
-          }).then();
-        })
-
-      } else {
-        this.userService.save(data, this.role.value).then((res) => {
-          this.reset();
-          Swal.fire({
-            icon: 'success',
-            title: 'Sucesso!',
-            text: 'Funcionário cadastrado',
-          }).then();
-        })
-
-      }
     }
+  }
+
+  showMessage(text: string) {
+    Swal.fire({icon: 'success', title: 'Sucesso!', text: text}).then();
   }
 
   reset() {
     this.name.setValue('');
     this.email.setValue('');
     this.role.setValue('');
-  }
-
-  ngOnDestroy(): void {
-    localStorage.removeItem('userEdit');
   }
 }

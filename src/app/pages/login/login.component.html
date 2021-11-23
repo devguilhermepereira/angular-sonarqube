@@ -8,7 +8,7 @@
         <mat-form-field appearance="fill">
           <mat-label>E-mail</mat-label>
           <input matInput placeholder="Ex: meuemail@example.com" [formControl]="email" required>
-          <mat-error *ngIf="email.invalid">{{pegarMensagemErro()}}</mat-error>
+          <mat-error *ngIf="email.invalid">{{getError()}}</mat-error>
         </mat-form-field>
       </div>
 
@@ -26,7 +26,7 @@
 
     </mat-card-content>
     <mat-card-actions align="end">
-      <button mat-button (click)="acessar()">Acessar</button>
+      <button mat-button (click)="login()">Acessar</button>
     </mat-card-actions>
   </mat-card>
 </div>
