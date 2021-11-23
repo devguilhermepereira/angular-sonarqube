@@ -1,12 +1,12 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-
-import { RouterModule } from '@angular/router';
-import { NgxSpinnerModule } from "ngx-spinner";
-import { CommonModule } from '@angular/common';
-import { DashboardComponent } from './dashboard.component';
-import { AngularMaterialModule } from '../../core/angular-material.module';
-import {UserService} from "../../core/services/user.service";
+import {NgModule} from '@angular/core';
+import {NgxSpinnerModule} from "ngx-spinner";
+import {CommonModule} from '@angular/common';
+import {DashboardComponent} from './dashboard.component';
+import {AngularMaterialModule} from '../../core/angular-material.module';
+import {UserService} from "../../core/services/user/user.service";
+import {NgxChartsModule} from "@swimlane/ngx-charts";
+import {RolesService} from "../../core/services/roles/roles.service";
+import {RouterModule} from "@angular/router";
 
 @NgModule({
   declarations: [
@@ -14,13 +14,15 @@ import {UserService} from "../../core/services/user.service";
   ],
   imports: [
     CommonModule,
-    BrowserModule,
-    RouterModule,
     NgxSpinnerModule,
-    AngularMaterialModule
+    AngularMaterialModule,
+    NgxChartsModule,
+    RouterModule
   ],
   providers: [
-    UserService
+    UserService,
+    RolesService
   ],
 })
-export class DashboardModule { }
+export class DashboardModule {
+}

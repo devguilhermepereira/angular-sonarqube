@@ -4,5 +4,5 @@ export class UserModel {
   name!: string;
   email!: string;
   active?: boolean;
-
+  userType?: any;
 }

@@ -1,27 +1,48 @@
-<p>
+<div>
   <mat-toolbar color="primary">
-    <button mat-icon-button [matMenuTriggerFor]="menu">
+    <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="sidenav['toggle']();">
       <mat-icon>menu</mat-icon>
     </button>
-    <span>Portal de usuários</span>
+    <div class="companyName a-link-interno" routerLink="/">
+      <h5></h5>
+    </div>
     <span class="example-spacer"></span>
-    <button mat-icon-button class="example-icon favorite-icon" aria-label="Example icon-button with heart icon">
-      <mat-icon>favorite</mat-icon>
-    </button>
-    <button mat-icon-button class="example-icon" aria-label="Example icon-button with share icon">
-      <mat-icon>share</mat-icon>
-    </button>
   </mat-toolbar>
-</p>
-
-
-<mat-menu #menu="matMenu">
-  <button mat-menu-item routerLink="/dashboard">
-    <mat-icon>dashboard</mat-icon>
-    <span>Dashboard</span>
-  </button>
-  <button mat-menu-item routerLink="/user">
-    <mat-icon>person</mat-icon>
-    <span>Novo Usuario</span>
-  </button>
-</mat-menu>
+  <mat-sidenav-container id="nav">
+    <mat-sidenav class="sidenav-menu" color="primary" #sidenav mode="over" opened="false">
+      <mat-nav-list>
+        <div class="mat-card-header-text m-3 d-grid">
+          <span class="mat-card-title">Olá,</span>
+          <span class="mat-card-subtitle">Tenha um excelente dia!</span>
+        </div>
+        <div class="mt-2 mb-5">
+          <div class="d-flex align-items-center">
+            <a mat-list-item (click)="sidenav['toggle']();" routerLink="/dashboard">
+              Dashboard
+            </a>
+          </div>
+          <hr>
+          <div class="d-flex align-items-center">
+            <a mat-list-item (click)="sidenav['toggle']();" [routerLink]="'/user'">
+              Novo Funcionario
+            </a>
+          </div>
+          <hr>
+          <div class="d-flex align-items-center">
+            <a mat-list-item (click)="sidenav['toggle']();logout();">
+              Sair
+            </a>
+          </div>
+        </div>
+        <div class="mat-card-header-text text-center div-company">
+          <span class="mat-card-subtitle">Eng Software - Unidep, 2021</span>
+        </div>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <div class="container-fluid container-aplicacao">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

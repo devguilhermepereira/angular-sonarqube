@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "site": "angular-sonarqube",
+    "public": "dist/portal",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "cleanUrls": true,
+    "trailingSlash": false,
+    "appAssociation": "AUTO"
+  }
+}

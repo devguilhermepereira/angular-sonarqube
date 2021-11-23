@@ -41,6 +41,7 @@ import {MatStepperModule} from "@angular/material/stepper";
 import {MatDatepickerModule} from "@angular/material/datepicker";
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatDividerModule} from "@angular/material/divider";
+import {MatSelectModule} from "@angular/material/select";
 
 
 @NgModule({
@@ -92,7 +93,8 @@ import {MatDividerModule} from "@angular/material/divider";
     MatTooltipModule,
     MatTreeModule,
     PortalModule,
-    ScrollingModule
+    ScrollingModule,
+    MatSelectModule
   ],
   providers: [
     MatNativeDateModule,

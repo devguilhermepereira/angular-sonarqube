@@ -3,9 +3,10 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {UserService} from "../../core/services/user.service";
+import {UserService} from "../../core/services/user/user.service";
 import {UserModel} from "../../core/models/user.model";
 import {Router} from "@angular/router";
+import {RolesService} from "../../core/services/roles/roles.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -14,19 +15,26 @@ import {Router} from "@angular/router";
 })
 export class DashboardComponent implements OnInit, AfterViewInit {
 
-  public displayedColumns: string[] = ['name', 'email', 'active'];
+  public roles: any;
+  public users: Array<UserModel> = [];
+  public userRoles: any;
+  public view: any = [500, 400];
+  public colorScheme: any = {
+    domain: ['#5AA454', '#E44D25', '#CFC0BB', '#7aa3e5', '#a8385d', '#aae3f5', '#5AA454', '#A10A28', '#C7B42C', '#AAAAAA']
+  };
+  public displayedColumns: string[] = ['name', 'email', 'role', 'active'];
   public dataSource: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator: any;
   @ViewChild(MatSort) sort: any;
 
-  constructor(private spinner: NgxSpinnerService, private userService: UserService, private router: Router) {
-    spinner.show();
-    this.dataSource = new MatTableDataSource([{}])
+  constructor(private spinner: NgxSpinnerService, private userService: UserService, private router: Router, private rolesService: RolesService) {
+    this.dataSource = new MatTableDataSource([{}]);
+    this.getRoles();
   }
 
   ngOnInit(): void {
-    this.pegarUsuarios();
+    this.getUsers();
   }
 
   ngAfterViewInit() {
@@ -34,15 +42,36 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     this.dataSource.sort = this.sort;
   }
 
-  pegarUsuarios() {
-    this.userService.get().then((res) => {
-      setTimeout(() => {
-        this.dataSource = new MatTableDataSource(res);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-        this.spinner.hide();
-      }, 3000);
+  getUsers() {
+    this.spinner.show();
+    this.reset();
+    this.userService.get().subscribe((res) => {
+      this.users = JSON.parse(JSON.stringify(res));
+      this.dataSource = new MatTableDataSource(res);
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+      setTimeout(() => this.setUsersRoles(), 1000);
     })
+  }
+
+  setUsersRoles() {
+    const usersRole = JSON.parse(JSON.stringify(this.roles));
+    usersRole.forEach((row: any) => row.value = 0);
+    this.dataSource.data.forEach((user: any) => {
+      const index = usersRole.findIndex((a: any) => a.id === user['userType'].role);
+      if (index >= 0) usersRole[index].value += 1;
+    });
+    this.roles = usersRole;
+    this.spinner.hide();
+  }
+
+  getRoles() {
+    let roles: any = [];
+    this.rolesService.get().subscribe((res) => {
+      this.userRoles = res;
+      res.forEach((row: any) => roles.push({...row, value: 0}));
+      this.roles = roles;
+    });
   }
 
   filtro(event: Event) {
@@ -53,10 +82,18 @@ export class DashboardComponent implements OnInit, AfterViewInit {
     }
   }
 
-  editar(user: UserModel) {
-    const userEdit = {name: user.name, email: user.email};
-    localStorage.setItem('userEdit', JSON.stringify(userEdit));
-    this.router.navigate(['/user/' + (user.id ? user.id : 66)])
+  getRoleName(user: UserModel): string {
+    return user && user.userType ? this.userRoles.find((row: any) => row.id === user.userType.role).name : '';
+  }
+
+  goEdit(user: UserModel) {
+    localStorage.setItem('userEdit', JSON.stringify(user));
+    this.router.navigate(['/user/' + user.id]);
+  }
+
+  reset() {
+    this.users = [];
+    this.dataSource = new MatTableDataSource([{}]);
   }
 }
 
