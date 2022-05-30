@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testExecutions version="1">
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\core\services\user\user.service.spec.ts">
+    <testCase name="UserService Iniciar service" duration="11"/>
+    <testCase name="UserService Executar find" duration="2"/>
+    <testCase name="UserService Executar get" duration="0"/>
+    <testCase name="UserService Executar saveUserTypes" duration="1"/>
+    <testCase name="UserService Executar upadateUserTypes" duration="1"/>
+    <testCase name="UserService Executar getUserTypes" duration="0"/>
+    <testCase name="UserService Executar update" duration="1"/>
+    <testCase name="UserService Executar save" duration="0"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\pages\login\login.component.spec.ts">
+    <testCase name="LoginComponent Deve ser criado" duration="11"/>
+    <testCase name="LoginComponent Executar pegarMensagemErro EMAIL INVALIDO" duration="1"/>
+    <testCase name="LoginComponent Executar pegarMensagemErro EMAIL VAZIO" duration="1"/>
+    <testCase name="LoginComponent Executar login com sucesso" duration="1"/>
+    <testCase name="LoginComponent Executar validLogin com sucesso no login" duration="2"/>
+    <testCase name="LoginComponent Executar validLogin com falha no login" duration="0"/>
+    <testCase name="LoginComponent Executar login com EMAIL INVALIDO" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\core\services\authentication\authentication.service.spec.ts">
+    <testCase name="AuthenticationService should be created" duration="4"/>
+    <testCase name="AuthenticationService Executar GET" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\pages\dashboard\dashboard.component.spec.ts">
+    <testCase name="DashboardComponent Iniciar component" duration="70"/>
+    <testCase name="DashboardComponent Depois de iniciar o component" duration="1"/>
+    <testCase name="DashboardComponent Ativar spinner" duration="1"/>
+    <testCase name="DashboardComponent Desativar spinner" duration="1"/>
+    <testCase name="DashboardComponent Pegar os usuários" duration="1"/>
+    <testCase name="DashboardComponent Executar filtro pelo nome" duration="1"/>
+    <testCase name="DashboardComponent Testar Paginação" duration="0"/>
+    <testCase name="DashboardComponent Executar filtro pelo email" duration="1"/>
+    <testCase name="DashboardComponent Editar Usuário" duration="1"/>
+    <testCase name="DashboardComponent Executar setUsersRoles" duration="1"/>
+    <testCase name="DashboardComponent Executar setUsersRoles com role" duration="0"/>
+    <testCase name="DashboardComponent Executar getRoleName" duration="2"/>
+    <testCase name="DashboardComponent Executar getRoleName sem user" duration="1"/>
+    <testCase name="DashboardComponent Executar getRoles" duration="0"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\core\guards\auth.guard.spec.ts">
+    <testCase name="AuthGuard canActivate" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\shared\layout\menu\menu.component.spec.ts">
+    <testCase name="MenuComponent Iniciar component" duration="3"/>
+    <testCase name="MenuComponent Executar logout" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\core\services\roles\roles.service.spec.ts">
+    <testCase name="RolesService should be created" duration="1"/>
+    <testCase name="RolesService Executar GET" duration="1"/>
+  </file>
+  <file path="C:\Users\Guilherme\Documents\faculdade\seguranca_em_sistemas_computacionais\angular-sonarqube\src\app\pages\user\user.component.spec.ts">
+    <testCase name="UserComponent Iniciar component com usuario vazio" duration="5"/>
+    <testCase name="UserComponent Iniciar component com usuario" duration="0"/>
+    <testCase name="UserComponent Deve desconstruir component" duration="0"/>
+    <testCase name="UserComponent Pegar cargos" duration="1"/>
+    <testCase name="UserComponent Cadastrar Usuario" duration="1"/>
+    <testCase name="UserComponent Cadastrar Usuario NOME INVALIDO" duration="1"/>
+    <testCase name="UserComponent Cadastrar Usuario EMAIL INVALIDO" duration="0"/>
+    <testCase name="UserComponent Atualizar Usuario EMAIL INVALIDO" duration="1"/>
+    <testCase name="UserComponent Atualizar Usuario" duration="1"/>
+    <testCase name="UserComponent Pegar Mensagem de erro EMAIL VAZIO" duration="0"/>
+    <testCase name="UserComponent Pegar Mensagem de erro EMAIL INVALIDO" duration="1"/>
+    <testCase name="UserComponent Pegar Mensagem de erro NOME" duration="0"/>
+    <testCase name="UserComponent Mostra mensagem CADASTRO" duration="53"/>
+    <testCase name="UserComponent Mostra mensagem ATUALIZAÇÃO" duration="29"/>
+    <testCase name="UserComponent Executar reset" duration="0"/>
+  </file>
+</testExecutions>
